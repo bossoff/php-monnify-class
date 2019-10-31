@@ -1,0 +1,40 @@
+{
+    "name": "djunehor/php-monnify-class",
+    "type": "library",
+    "description": "A PHP class to authenticate, reserve account, get transaction status and unreserve class",
+    "keywords": [
+        "djunehor",
+        "php",
+        "monnify"
+    ],
+    "homepage": "https://github.com/djunehor/php-monnify-class",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zacchaeus Bolaji",
+            "email": "djunehor@gmail.com",
+            "homepage": "https://github.com/djunehor",
+            "role": "Software Engineer"
+        }
+    ],
+    "require": {
+        "php" : "~7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Djunehor\\Monnify\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Djunehor\\Monnify\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+
+}

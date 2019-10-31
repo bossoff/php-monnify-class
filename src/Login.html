@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+    html,body {
+        height:100%;
+        width:100%;
+        margin:0;
+    }
+    body {
+        display:flex;
+    }
+    form {
+        margin:auto;
+    }
+</style>
+<body>
+<div class="container">
+<form action="#" method="POST">
+    <h2>Login to System</h2>
+
+    <div class="col">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" id="username" required>
+    </div>
+    <div class="col">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" id="password" required>
+    </div>
+
+    <div class="col">
+        <label for="password">Remember me (90 days)</label>
+        <input class="form-control" type="checkbox" id="rememeberme">
+    </div>
+    <div class="col">
+        <button class="btn btn-success btn-lg" type="submit">Login</button>
+    </div>
+</form>
+</div>
+</body>
+</html>
