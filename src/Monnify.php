@@ -1,4 +1,5 @@
 <?php
+
 namespace Djunehor\Monnify;
 
 /**Class to interact with monnify API
@@ -59,6 +60,10 @@ class Monnify
 
     }
 
+    /**Check if token is still valid, re-authenticate if token expired
+     * and return valid token
+     * @return string
+     */
     public function getRefreshToken()
     {
         if ($this->isTokenValid()) {
@@ -70,21 +75,39 @@ class Monnify
         return $token;
     }
 
+    /**
+     * @return null|string
+     */
     public function getAccessToken()
     {
         return $this->accessToken;
     }
 
+    /**
+     * @return null|string
+     */
     public function getTokenExpiry()
     {
         return $this->tokenExpiry;
     }
 
+    /**check if the current token
+     * hasn't expired
+     * @return bool
+     */
     public function isTokenValid()
     {
         return ($this->accessToken && time() < $this->tokenExpiry);
     }
 
+    /**I'm using this so as not to rely on third package request package
+     * like guzzle
+     * @param string $endpoint
+     * @param string $method
+     * @param array $headers
+     * @param array $body
+     * @return mixed
+     */
     private function request(string $endpoint, $method = 'POST', array $headers = [], array $body = [])
     {
         $ch = curl_init();
@@ -101,6 +124,10 @@ class Monnify
         return json_decode($result);
     }
 
+    /**
+     * @param array $body
+     * @return bool|object
+     */
     public function reserveAccount(array $body = [])
     {
 
@@ -114,13 +141,17 @@ class Monnify
         $response = $this->request('bank-transfer/reserved-accounts', 'POST', $headers, $body);
 
 
-        if($response->requestSuccessful) {
+        if ($response->requestSuccessful) {
             return $response->responseBody;
         }
         return false;
 
     }
 
+    /**
+     * @param string $reference
+     * @return bool|object
+     */
     public function getTransactionStatus(string $reference)
     {
 
@@ -130,19 +161,23 @@ class Monnify
         ];
 
         $body = [
-            "paymentReference"=> $reference
+            "paymentReference" => $reference
         ];
 
         $response = $this->request('merchant/transactions/query', 'GET', $headers, $body);
 
-        if($response->requestSuccessful) {
+        if ($response->requestSuccessful) {
             return $response->responseBody;
         }
         return false;
 
     }
 
-    public function unReserveAccount($accountNumber)
+    /**
+     * @param string $accountNumber
+     * @return bool|object
+     */
+    public function unReserveAccount(string $accountNumber)
     {
 
         $headers = [
@@ -151,7 +186,7 @@ class Monnify
 
         $response = $this->request("bank-transfer/reserved-accounts/$accountNumber", 'DELETE', $headers);
 
-        if($response->requestSuccessful) {
+        if ($response->requestSuccessful) {
             return $response->responseBody;
         }
         return false;
